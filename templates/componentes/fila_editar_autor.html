@@ -1,0 +1,19 @@
+{% macro fila_editar_autor(autor) %}
+<tr>
+    <td>{{ autor.id }}</td>
+    <td><input type="text" class="form-control form-control-sm" name="nombre" value="{{ autor.nombre }}"></td>
+    <td><input type="text" class="form-control form-control-sm" name="pais" value="{{ autor.pais or '' }}"></td>
+    <td><input type="number" class="form-control form-control-sm" name="nacimiento" value="{{ autor.nacimiento or '' }}"></td>
+    <td class="text-end">
+        <button class="btn btn-sm btn-primary"
+                hx-put="/autores/{{ autor.id }}"
+                hx-include="closest tr"
+                hx-target="closest tr"
+                hx-swap="outerHTML">Guardar</button>
+        <button class="btn btn-sm btn-outline-secondary"
+                hx-get="/autores/{{ autor.id }}/cancelar"
+                hx-target="closest tr"
+                hx-swap="outerHTML">Cancelar</button>
+    </td>
+</tr>
+{% endmacro %}

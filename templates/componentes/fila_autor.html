@@ -1,0 +1,26 @@
+{% macro fila_autor(autor) %}
+<tr>
+    <td>{{ autor.id }}</td>
+    <td>{{ autor.nombre }}</td>
+    <td>{{ autor.pais }}</td>
+    <td>{{ autor.nacimiento }}</td>
+    <td class="text-end">
+        <button class="btn btn-sm btn-outline-primary"
+                hx-get="/autores/{{ autor.id }}/libros"
+                hx-target="#libros-de-{{ autor.id }}"
+                hx-swap="innerHTML">Ver Libros</button>
+        <button class="btn btn-sm btn-outline-secondary"
+                hx-get="/autores/{{ autor.id }}/editar"
+                hx-target="closest tr"
+                hx-swap="outerHTML">Editar</button>
+        <button class="btn btn-sm btn-outline-danger"
+                hx-delete="/autores/{{ autor.id }}"
+                hx-target="#tabla-autores"
+                hx-swap="outerHTML"
+                hx-confirm="¿Borrar este autor?">Borrar</button>
+    </td>
+</tr>
+<tr>
+    <td colspan="5" id="libros-de-{{ autor.id }}"></td>
+</tr>
+{% endmacro %}

@@ -1,0 +1,24 @@
+{% macro formulario_crear_autor() %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Crear autor</h5>
+        <form class="row g-3" hx-post="/autores" hx-target="#tabla-autores" hx-swap="outerHTML">
+            <div class="col-md-4">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del autor">
+            </div>
+            <div class="col-md-3">
+                <label for="pais" class="form-label">País</label>
+                <input type="text" class="form-control" id="pais" name="pais" placeholder="País">
+            </div>
+            <div class="col-md-3">
+                <label for="nacimiento" class="form-label">Año de nacimiento</label>
+                <input type="number" class="form-control" id="nacimiento" name="nacimiento" placeholder="Año">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endmacro %}

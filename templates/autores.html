@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% from "componentes/formulario_autor.html" import formulario_crear_autor %}
+{% from "componentes/tabla_autores.html" import tabla_autores %}
+
+{% block content %}
+
+<h1 class="mb-4">Autores</h1>
+
+
+{{ formulario_crear_autor() }}
+{{ tabla_autores(autores) }}
+{% endblock %}

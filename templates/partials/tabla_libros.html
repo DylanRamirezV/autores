@@ -1,0 +1,39 @@
+<table border="1" cellpadding="12" style="border-collapse: collapse; width: 100%; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-color: #ddd;">
+    <thead>
+        <tr style="background: #ecf0f1; text-align: left; color: #2c3e50;">
+            <th>ID</th>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for libro in libros %}
+        <tr>
+            <td>{{ libro.id }}</td>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.anio_publicacion }}</td>
+            <td style="display:flex; gap:8px;">
+                <button type="button"
+                        onclick="var el=document.getElementById('autores-{{ libro.id }}'); el.style.display = (el.style.display === 'table-row') ? 'none' : 'table-row';"
+                        style="background: #9b59b6; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 3px;">Ver Autores</button>
+                <button hx-delete="/libros/{{ libro.id }}" hx-target="#tabla-libros-container" hx-swap="innerHTML" hx-confirm="¿Estás seguro de eliminar este libro?" style="background: #e74c3c; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 3px;">Eliminar</button>
+            </td>
+        </tr>
+        <tr id="autores-{{ libro.id }}" style="display:none;">
+            <td colspan="4" style="background:#f8f9fa;">
+                <strong>Autor(es):</strong>
+                {% for autor in libro.autores %}
+                    <a href="/autores/{{ autor.id }}/libros">{{ autor.nombre }}</a>{% if not loop.last %}, {% endif %}
+                {% else %}
+                    Sin autor registrado.
+                {% endfor %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" style="text-align: center; color: #7f8c8d; padding: 20px;">No hay libros registrados en este momento.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

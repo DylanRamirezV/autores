@@ -1,0 +1,12 @@
+{% if libros %}
+<div class="p-2">
+    <strong>Libros de {{ autor.nombre }}:</strong>
+    <ul class="mb-0">
+        {% for libro in libros %}
+        <li>{{ libro.titulo }} ({{ libro.anio_publicacion }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="p-2 text-muted">Este autor no tiene libros registrados.</div>
+{% endif %}
